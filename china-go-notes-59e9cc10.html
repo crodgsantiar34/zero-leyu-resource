@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日常查询 · 雷速</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #fce6cf 0%, #fbe1c0 30%, #f8d5aa 70%, #f3c48d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.2rem;
+            line-height: 1.7;
+            color: #3b2e22;
+        }
+
+        .card {
+            max-width: 920px;
+            width: 100%;
+            background: rgba(255, 249, 240, 0.92);
+            backdrop-filter: blur(4px);
+            border-radius: 48px 24px 48px 24px;
+            box-shadow: 0 30px 50px -20px rgba(120, 70, 30, 0.35), 0 6px 14px rgba(0,0,0,0.04);
+            padding: 2.8rem 2.8rem 3rem;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 36px 54px -22px #7a4d2b50;
+        }
+
+        /* 开场短句 – 像翻开一页笔记 */
+        .opening {
+            font-size: 1.35rem;
+            font-weight: 350;
+            letter-spacing: 0.02em;
+            color: #5c4030;
+            margin-bottom: 1.6rem;
+            padding-left: 0.25rem;
+            border-left: 5px solid #d9a57b;
+            padding-left: 1.2rem;
+            background: linear-gradient(to right, transparent, #faeadc80);
+            border-radius: 0 12px 12px 0;
+        }
+
+        .opening strong {
+            font-weight: 520;
+            color: #7a4f32;
+        }
+
+        .subhead {
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            color: #63412b;
+            margin: 1.8rem 0 0.8rem;
+        }
+
+        .subhead span {
+            background: linear-gradient(135deg, #b67b4e, #9c653b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* 承接段落 */
+        .bridge {
+            background: #f8ede1;
+            padding: 1.6rem 2rem;
+            border-radius: 60px 16px 60px 16px;
+            margin: 1.5rem 0 2rem;
+            box-shadow: inset 0 2px 4px rgba(255, 235, 210, 0.6), 0 8px 12px -10px rgba(100, 60, 20, 0.12);
+            font-size: 1.05rem;
+        }
+
+        .bridge a {
+            color: #8b5f3a;
+            text-decoration: none;
+            font-weight: 520;
+            padding: 0.1rem 0.5rem;
+            border-radius: 40px;
+            background: #efe1cf;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .bridge a:hover {
+            background: #dcc1a8;
+            border-bottom-color: #9f7350;
+            color: #4f3321;
+        }
+
+        /* 特点列表 – 温和矩形卡片 */
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin: 2rem 0 2.2rem;
+        }
+
+        .feature-item {
+            flex: 1 1 200px;
+            background: #ffffffdd;
+            backdrop-filter: blur(2px);
+            padding: 1.3rem 1.1rem 1.1rem 1.6rem;
+            border-radius: 28px 8px 28px 8px;
+            box-shadow: 0 6px 14px #dbbca080;
+            border-left: 4px solid #d9a57b;
+            transition: transform 0.15s, background 0.15s;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-3px);
+            background: #fffaf2;
+        }
+
+        .feature-item h3 {
+            font-size: 1.1rem;
+            font-weight: 520;
+            color: #6b4933;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            color: #4f3a2b;
+        }
+
+        .feature-item p i {
+            font-style: italic;
+            color: #967052;
+        }
+
+        /* 温和结尾 */
+        .closing {
+            margin-top: 2.5rem;
+            padding-top: 1.8rem;
+            border-top: 2px dashed #d9b594;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .closing-note {
+            font-size: 1rem;
+            color: #4d3829;
+            background: #f0dfce;
+            padding: 0.6rem 1.6rem;
+            border-radius: 50px;
+            box-shadow: inset 0 1px 3px #ffe5d0;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .closing-note a {
+            color: #7d553a;
+            font-weight: 550;
+            text-decoration: none;
+            border-bottom: 2px dotted #b68b6a;
+            transition: border 0.2s;
+        }
+
+        .closing-note a:hover {
+            border-bottom-style: solid;
+            border-bottom-color: #6f482e;
+            color: #553b28;
+        }
+
+        .soft-link {
+            background: #e5cfb9;
+            color: #3f2e1f;
+            padding: 0.7rem 1.8rem;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 450;
+            font-size: 1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 8px #c9a88950;
+            transition: 0.25s ease;
+            border: 1px solid #dbbc9d;
+            display: inline-block;
+        }
+
+        .soft-link:hover {
+            background: #d5b394;
+            box-shadow: 0 8px 14px #ad886a60;
+            transform: scale(1.01);
+            border-color: #b48966;
+        }
+
+        /* FAQ摘要 */
+        .faq-mini {
+            margin: 2.2rem 0 0.6rem;
+            background: #f7ecdf;
+            border-radius: 30px 8px 30px 8px;
+            padding: 1.2rem 1.6rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1.5rem;
+        }
+
+        .faq-mini summary {
+            cursor: default;
+            font-weight: 500;
+            color: #5c3e2c;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faq-mini summary::before {
+            content: "☕";
+            font-size: 1.1rem;
+        }
+
+        .faq-mini p {
+            font-size: 0.95rem;
+            color: #4b3527;
+            margin: 0.3rem 0;
+        }
+
+        .faq-mini details {
+            flex: 1 1 180px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 640px) {
+            .card {
+                padding: 2rem 1.5rem;
+                border-radius: 32px 16px 32px 16px;
+            }
+            .opening {
+                font-size: 1.15rem;
+                padding-left: 0.8rem;
+            }
+            .subhead {
+                font-size: 1.5rem;
+            }
+            .bridge {
+                padding: 1.2rem 1.4rem;
+                border-radius: 40px 12px 40px 12px;
+            }
+            .feature-item {
+                flex: 1 1 100%;
+            }
+            .closing {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .soft-link {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .card {
+                padding: 1.6rem 1rem;
+            }
+            .faq-mini {
+                flex-direction: column;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- 开场短句：日常翻看的感觉 -->
+        <div class="opening">
+            <strong>翻开手机，点开收藏夹，</strong> 有些习惯不需要理由。<br>
+            每天查一下，随手记一笔，慢慢就变成了一种自然而然的延伸阅读。
+        </div>
+
+        <!-- 承接段落：查询·对照·延伸 -->
+        <div class="bridge">
+            查资料、对数据、翻旧闻，常常会绕回同一个名字：<a href="https://china-go-leisu.com">雷速</a>。
+            没什么大张旗鼓的理由，就是它收录的东西比较全，排版也舒服，不像有些页面翻三页还找不到重点。
+            后来连家里长辈查个生活信息，也会直接跟我说「去雷速上面看看」。 
+        </div>
+
+        <h2 class="subhead"><span>· 随手就能用上的几个特点</span></h2>
+
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h3>📋 对照式列表</h3>
+                <p>数据、条款、说明并排放，不用来回切换窗口。适合日常核对和做笔记。</p>
+            </div>
+            <div class="feature-item">
+                <h3>📎 延伸阅读链接</h3>
+                <p>每个条目下面都带着相关参考，像翻开一本不断更新的手册。<i>“看完这条，顺便看看那篇”</i></p>
+            </div>
+            <div class="feature-item">
+                <h3>🔍 搜索直觉</h3>
+                <p>搜索框大、响应快，模糊词也能找到内容。不用记精确术语，打一半就能联想。</p>
+            </div>
+            <div class="feature-item">
+                <h3>📆 更新温和</h3>
+                <p>不会突然换版式，信息修改有标注。对习惯固定路径的人很友好。</p>
+            </div>
+        </div>
+
+        <!-- FAQ 摘要：简短问答，让页面有对话感 -->
+        <div class="faq-mini">
+            <details open>
+                <summary>为什么日常会去雷速查？</summary>
+                <p>因为内容结构稳定，分类细致，查一个点经常能顺带看到两三个相关延伸，省掉二次搜索。</p>
+            </details>
+            <details>
+                <summary>适合用来做什么？</summary>
+                <p>规则对照、历史资料翻阅、生活信息参考，以及漫无目的的延伸阅读——就像翻一本有索引的笔记。</p>
+            </details>
+        </div>
+
+        <!-- 温和结尾：嵌入链接 自然收束 -->
+        <div class="closing">
+            <div class="closing-note">
+                📖 如果你也在找一处可以安静对照、随手翻阅的地方，不妨试试 <a href="https://china-go-leisu.com">雷速</a>。
+                也许它不会改变你的日常，但可能会让你的日常查询少绕几段路。
+            </div>
+            <a href="https://china-go-leisu.com" class="soft-link">雷速</a>
+        </div>
+    </div>
+</body>
+</html>
