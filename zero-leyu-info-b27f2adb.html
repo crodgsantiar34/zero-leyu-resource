@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>leyu · 产品说明页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fbeee6 0%, #fbdacc 45%, #fce4d4 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.25rem;
+            line-height: 1.7;
+            color: #3b2e2b;
+        }
+
+        .card {
+            max-width: 820px;
+            width: 100%;
+            background: rgba(255, 253, 250, 0.9);
+            backdrop-filter: blur(2px);
+            border-radius: 42px;
+            padding: 2.8rem 2.4rem;
+            box-shadow: 0 18px 36px -12px rgba(140, 80, 50, 0.20), 0 6px 12px rgba(230, 160, 120, 0.08);
+            transition: all 0.2s ease;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1.2rem 0.9rem;
+            }
+            .card {
+                padding: 2rem 1.4rem;
+                border-radius: 32px;
+            }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 580;
+            letter-spacing: -0.02em;
+            color: #4f342e;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .subhead {
+            font-size: 1.05rem;
+            color: #7a5c52;
+            border-left: 3px solid #cc8f7a;
+            padding-left: 1rem;
+            margin-bottom: 2rem;
+            font-weight: 380;
+        }
+
+        .intro {
+            background: #fdf6f2;
+            padding: 1.5rem 1.6rem;
+            border-radius: 28px;
+            margin-bottom: 2.2rem;
+            border: 1px solid #f1ded6;
+            font-size: 1.02rem;
+        }
+
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem 1.8rem;
+            margin: 2rem 0 2.2rem 0;
+        }
+
+        @media (max-width: 540px) {
+            .highlight-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        .highlight-item {
+            background: #fffbf8;
+            padding: 1.2rem 1.4rem;
+            border-radius: 24px;
+            border: 1px solid #e9d9d1;
+        }
+
+        .highlight-item h3 {
+            font-size: 1.15rem;
+            font-weight: 530;
+            color: #4f342e;
+            margin-bottom: 0.35rem;
+        }
+
+        .highlight-item p {
+            font-size: 0.95rem;
+            color: #5d4943;
+        }
+
+        .usage-note {
+            background: #f3e7df;
+            border-radius: 30px;
+            padding: 1.4rem 1.8rem;
+            margin: 1.8rem 0 2.2rem 0;
+            border-left: 5px solid #c2846c;
+        }
+
+        .usage-note strong {
+            color: #4a2e26;
+        }
+
+        .faq-mini {
+            border-top: 1px solid #e7d6cd;
+            padding-top: 1.8rem;
+            margin-top: 2rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+
+        .faq-item .q {
+            font-weight: 530;
+            color: #4f342e;
+        }
+
+        .faq-item .a {
+            color: #63514b;
+            margin-top: 0.15rem;
+            padding-left: 0.6rem;
+        }
+
+        .link-sentence {
+            background: #fcf3ed;
+            padding: 1rem 1.5rem;
+            border-radius: 40px;
+            display: inline-block;
+            margin: 0.5rem 0 0.2rem 0;
+            font-size: 1rem;
+        }
+
+        .link-sentence a {
+            color: #9f5f4b;
+            font-weight: 540;
+            text-decoration: none;
+            border-bottom: 2px solid #dbb7a8;
+            padding-bottom: 1px;
+            transition: border 0.15s, color 0.15s;
+        }
+
+        .link-sentence a:hover {
+            border-bottom-color: #8f4f3a;
+            color: #7f4532;
+        }
+
+        .button-link {
+            display: inline-block;
+            background: #dbb7a8;
+            color: #2f221e;
+            font-weight: 500;
+            padding: 0.5rem 1.6rem;
+            border-radius: 60px;
+            text-decoration: none;
+            border: none;
+            transition: background 0.2s, transform 0.1s;
+            letter-spacing: 0.3px;
+            margin-top: 0.2rem;
+            box-shadow: 0 4px 8px rgba(160, 100, 70, 0.08);
+            font-size: 0.95rem;
+        }
+
+        .button-link:hover {
+            background: #c99b88;
+            transform: scale(1.02);
+        }
+
+        .disclaimer {
+            margin-top: 2.2rem;
+            padding: 1rem 1.4rem;
+            background: #fff9f5;
+            border-radius: 30px;
+            border: 1px dashed #d6bbb0;
+            font-size: 0.9rem;
+            color: #685450;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ead9d0;
+            margin: 1.6rem 0;
+        }
+
+        .footer-note {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.2rem;
+            color: #7f655d;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+
+    <h1>leyu · 产品说明</h1>
+    <div class="subhead">围绕关键词展开 · 一份平实的主题整理</div>
+
+    <div class="intro">
+        <p><strong>leyu</strong> 对应的是一个以信息呈现和内容组织为核心方向的主题。本站旨在为访问者提供结构清晰、风格克制的浏览体验，不附加诱导性表达，也不做超出实际功能的承诺。以下从几个侧面对主题进行说明。</p>
+    </div>
+
+    <!-- 亮点部分：三个特点 -->
+    <div class="highlight-grid">
+        <div class="highlight-item">
+            <h3>内容聚合</h3>
+            <p>将分散主题归纳为摘要与亮点，减少信息过载，让浏览者能更快定位自己关心的部分。</p>
+        </div>
+        <div class="highlight-item">
+            <h3>克制的界面</h3>
+            <p>避免弹窗、闪烁或夸张按钮，以卡片和柔和渐变为主，聚焦信息本身而非视觉刺激。</p>
+        </div>
+        <div class="highlight-item">
+            <h3>场景适配</h3>
+            <p>无论是快速查阅还是细致了解，页面结构都保留了可扩展的阅读节奏，不强制线性浏览。</p>
+        </div>
+        <div class="highlight-item">
+            <h3>持续整理</h3>
+            <p>内容会随主题更新进行合理调整，保持说明的有效性，不做永久性夸大表述。</p>
+        </div>
+    </div>
+
+    <!-- 使用建议 -->
+    <div class="usage-note">
+        <strong>使用建议</strong><br>
+        本页面围绕主题关键词提供概括性说明。如果需要了解更完整的内容，可以直接访问对应页面。建议先阅读摘要与 FAQ，再根据自身需求决定是否深入浏览。所有展示均基于真实的功能描述，无隐藏跳转。
+    </div>
+
+    <!-- 可信但克制的访问说明 嵌入链接 -->
+    <div class="link-sentence">
+        📌 想进一步了解主题内容？可直达 <a href="https://zero-leyu.com.cn">leyu</a> 查阅完整页面。
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-mini">
+        <div class="faq-item">
+            <div class="q">▸ 这个页面主要解决什么问题？</div>
+            <div class="a">提供一个信息组织清晰、风格稳定的产品介绍页，让访问者快速了解主题方向与特点，不制造紧迫感或误导点击。</div>
+        </div>
+        <div class="faq-item">
+            <div class="q">▸ 内容会经常变化吗？</div>
+            <div class="a">随着主题本身的调整会进行合理更新，但不会为了流量而频繁改动核心说明。变更会保留版本一致性。</div>
+        </div>
+        <div class="faq-item">
+            <div class="q">▸ 是否可以信任这个页面描述？</div>
+            <div class="a">描述基于实际的产品与主题功能，不包含虚假承诺、无根据的排名或诱导性话术。读者可自行对照实际页面验证。</div>
+        </div>
+    </div>
+
+    <!-- 额外的按钮链接，但文本不是访问/进入等 -->
+    <a href="https://zero-leyu.com.cn" class="button-link">leyu</a>
+
+    <hr>
+
+    <div class="disclaimer">
+        <strong>说明</strong> · 本页为产品介绍型说明，所有表述均基于真实功能与稳定内容。页面不收集用户数据，不含外部跟踪链接。建议通过正规浏览器访问，以获得最佳显示效果。
+    </div>
+
+    <div class="footer-note">
+        <span>版本摘要 · 2025</span>
+        <span>基于主题内容整理</span>
+    </div>
+
+</div>
+</body>
+</html>
